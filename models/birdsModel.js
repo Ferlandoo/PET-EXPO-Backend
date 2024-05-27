@@ -33,9 +33,11 @@ const birdSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  wingspan_cm: {
+    type: Number,
+  },
   height_cm: {
     type: Number,
-    required: true,
   },
   image: {
     type: String,

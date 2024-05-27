@@ -9,12 +9,12 @@ const catSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  temperate: {
+  temperament: {
     type: String,
     required: true,
   },
-  color: {
-    type: Array,
+  colors: {
+    type: [String],
     required: true,
   },
   description: {

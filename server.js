@@ -1,19 +1,32 @@
 import express from 'express';
+import path from 'path';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import connectDB from './config/dbConfig.js';
+import birdRoutes from './routes/birdsRoutes.js';
+import catRoutes from './routes/catsRoutes.js';
+import dogRoutes from './routes/dogsRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 const port = process.env.PORT;
+connectDB();
 const app = express();
 
+// Body parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// Cookie parser middleware
+app.use(cookieParser());
 
-app.get('/', (request, response) => {
-  response.send('API running...');
-});
+app.use('/api/birds', birdRoutes);
+app.use('/api/cats', catRoutes);
+app.use('/api/dogs', dogRoutes);
+app.use('/api/user', userRoutes);
 
-app.get('/api/products', (request, response) => {
-  response.json(products);
-});
+const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

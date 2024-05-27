@@ -13,7 +13,7 @@ const dogSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  life_span: {
+  lifespan: {
     type: String,
     required: true,
   },
@@ -25,8 +25,8 @@ const dogSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  color: {
-    type: String,
+  colors: {
+    type: [String],
     required: true,
   },
   description: {
