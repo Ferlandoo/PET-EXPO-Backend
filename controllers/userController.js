@@ -21,30 +21,6 @@ const loginUser = asyncHandler(async (request, response) => {
   }
 });
 
-// @decs Register a new user
-// @route POST /api/user/register
-// @access Public
-const registerUser = asyncHandler(async (request, response) => {
-  const { username, email, password } = request.body;
-  const userExists = await User.findOne({ username });
-  if (userExists) {
-    response.status(400);
-    throw new Error("User already exists");
-  }
-  const user = await User.create({ username, email, password });
-  if (user) {
-    generateToken(response, user._id);
-    response.status(201).json({
-      _id: user._id,
-      username: user.username,
-      email: user.email,
-    });
-  } else {
-    response.status(400);
-    throw new Error("Invalid user data");
-  }
-});
-
 // @desc Log user out
 // @route POST /api/user/logout
 // @access Private
