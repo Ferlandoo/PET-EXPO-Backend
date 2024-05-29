@@ -72,4 +72,4 @@ const updateUserProfile = asyncHandler(async (request, response) => {
   }
 });
 
-export { loginUser, logoutUser, getUserProfile, updateUserProfile, registerUser };
+export { loginUser, logoutUser, getUserProfile, updateUserProfile };
