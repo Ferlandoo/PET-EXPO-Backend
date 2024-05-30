@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/dbConfig.js';
 import birdRoutes from './routes/birdsRoutes.js';
@@ -12,6 +13,13 @@ dotenv.config();
 const port = process.env.PORT;
 connectDB();
 const app = express();
+
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+  optionSuccessStatus: 200
+}
+app.use(cors(corsOptions));
 
 // Body parser middleware
 app.use(express.json());
