@@ -6,14 +6,14 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
   destination(request, file, callback) {
-    callback(null, 'uploads/');
+    callback(null, './uploads/');
   },
   filename(request, file, callback) {
     callback(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
   },
 });
 
-function fileFilter(request, response, callback) {
+function fileFilter(request, file, callback) {
   const filetypes = /jpe?g|png|webp/;
   const mimetypes = /image\/jpe?g|image\/png|image\/webp/;
 
@@ -21,7 +21,7 @@ function fileFilter(request, response, callback) {
   const mimetype = mimetypes.test(file.mimetype);
 
   if (extname && mimetype) {
-    return callback(null, true);
+    callback(null, true);
   } else {
     callback(new Error('Images only!'), false);
   }
@@ -37,7 +37,7 @@ router.post('/', (request, response) => {
     }
     response.status(200).send({
       message: 'Image uploaded successfully',
-      image: `/${request.file.path}`,
+      image: `http://localhost:5018/${request.file.path}`,
     });
   });
 });

@@ -50,7 +50,7 @@ const createBird = aysncHandler(async (request, response) => {
 // @route PUT /api/birds/:id
 // @access Private/Admin
 const updateBird = aysncHandler(async (request, response) => {
-  const { name, species, family, habitat, place_of_found, diet, description, wingspan_cm, weight_kg, image } = request.body;
+  const { name, species, family, habitat, place_of_found, diet, description, wingspan_cm, weight_kg, height_cm, image } = request.body;
 
   const bird = await Bird.findById(request.params.id);
 
@@ -64,6 +64,7 @@ const updateBird = aysncHandler(async (request, response) => {
     bird.description = description;
     bird.wingspan_cm = wingspan_cm;
     bird.weight_kg = weight_kg;
+    bird.height_cm = height_cm;
     bird.image = image;
 
     const updatedBird = await bird.save();

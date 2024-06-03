@@ -8,6 +8,7 @@ import birdRoutes from './routes/birdsRoutes.js';
 import catRoutes from './routes/catsRoutes.js';
 import dogRoutes from './routes/dogsRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 
 dotenv.config();
 const port = process.env.PORT;
@@ -32,9 +33,10 @@ app.use('/api/birds', birdRoutes);
 app.use('/api/cats', catRoutes);
 app.use('/api/dogs', dogRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/uploads', uploadRoutes);
 
 const __dirname = path.resolve();
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
