@@ -38,6 +38,18 @@ app.use('/api/uploads', uploadRoutes);
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/build')));
+
+  app.get('*', (request, response) =>
+    response.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  );
+} else {
+  app.get('/', (request, response) => {
+    response.send('API is running....');
+  });
+}
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
