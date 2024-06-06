@@ -61,6 +61,7 @@ const updateUserProfile = asyncHandler(async (request, response) => {
       user.password = request.body.password;
     }
     const updatedUser = await user.save();
+    generateToken(response, updatedUser._id);
     response.status(200).json({
       _id: updatedUser._id,
       username: updatedUser.username,
